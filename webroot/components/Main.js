@@ -1,0 +1,65 @@
+import React from 'react'
+import { unmountComponentAtNode,render } from 'react-dom'
+import { Modal } from './Common'
+import Z_Util from '../statics/js/public'
+require("../statics/less/common.less");
+require("../statics/less/subpage.less");
+
+
+const Main = React.createClass({
+    childContextTypes: {
+        color: React.PropTypes.string,
+        subPages: React.PropTypes.string
+    },
+    getChildContext(){
+        var {subPage} = this.refs;
+        return {
+            color: "purple",
+            subPages: "#subPage"
+        }
+    },
+    modalSubmit(){
+        var subPage = this.refs.subPage;
+        this.props.handleSubmit(subPage);
+        this.modalCancel();
+    },
+    modalCancel(){
+        this.props.hideModal();
+        unmountComponentAtNode(this.refs.subPage);
+    },
+    componentWillReceiveProps(nextprops){
+        var subPage = this.refs.subPage;
+        var title = nextprops.title;
+        var modalData = {
+            title: title,
+            children: nextprops.modalEl,
+            style: {width: '220px'},
+            modalCancel: this.modalCancel,
+            modalSubmit: this.modalSubmit
+        }
+        if(nextprops.showModal){
+            render(<Modal {...modalData}/>,subPage);
+        }
+    },
+    componentDidMount(){
+
+        var {showView} = this.props,
+            {hash} = this.props.routing.locationBeforeTransitions,
+            hashStr = hash.substring(2);
+        var firstPath = Z_Util.getFirstPath(hashStr);
+        console.log(hashStr,firstPath);
+        if(hashStr)showView(hashStr,firstPath);
+        else showView("/home","home")
+
+    },
+    render(){
+        var { children } = this.props;
+        return (
+            <div id="main">
+                {children}
+                <div ref="subPage" id="subPage"/>
+            </div>
+        )
+    }
+})
+export default Main;
