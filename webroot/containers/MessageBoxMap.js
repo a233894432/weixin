@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         showView: (view,belongto) => {
+            alert(view);
             dispatch(showView(view,belongto))
         }
     }

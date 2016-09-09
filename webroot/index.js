@@ -31,26 +31,29 @@ const store = createStore(
     )
 );
 const history = syncHistoryWithStore(browserHistory, store);
+setTimeout(function(){
+    $("#wxstartimg").remove();
+    render(
+        <Provider store={store}>
+            <Router history={history}>
+                <Route path="/" component={MainMap}>
+                    <Route path="appview" component={RouteApp}>
+                        <Route path="tasks" component={TaskPage} />
+                        <Route path="home" component={Home} />
+                    </Route>
+                    <Route path="passport" component={Passport}>
+                        <Route path="login" component={Login}/>
+                        <Route path="regist" component={Regist}/>
+                        <Route path="reusername" component={Reusername}/>
+                        <Route path="repassword" component={Repassword}/>
+                    </Route>
+                </Route>
+            </Router>
+        </Provider>,
+        document.getElementById("root")
+    )
+},200)
 
-render(
-    <Provider store={store}>
-        <Router history={history}>
-            <Route path="/" component={MainMap}>
-                <Route path="appview" component={RouteApp}>
-                    <Route path="tasks" component={TaskPage} />
-                    <Route path="home" component={Home} />
-                </Route>
-                <Route path="passport" component={Passport}>
-                    <Route path="login" component={Login}/>
-                    <Route path="regist" component={Regist}/>
-                    <Route path="reusername" component={Reusername}/>
-                    <Route path="repassword" component={Repassword}/>
-                </Route>
-            </Route>
-        </Router>
-    </Provider>,
-    document.getElementById("root")
-)
 
 //console.log(store.getState());
 //var unsubscribe = store.subscribe(()=>{console.log(store.getState())});

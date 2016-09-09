@@ -24,7 +24,6 @@ const MessageBox = React.createClass({
         if(historyState == "reload" && !prevHash.startsWith(nextHash)){
             $("#subPage").empty();
         }
-
         console.log("messagebox 接收到的属性");
         console.log(nextProps);
         console.log("历史操作：" + historyState);

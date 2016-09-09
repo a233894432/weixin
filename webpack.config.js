@@ -11,10 +11,10 @@ module.exports = {
     module:{
         loaders:[
             { test: /\.css$/,loader:'style!css!postcss'},
-            { test:/\.js$/,loader:'babel-loader?presets[]=react,presets[]=es2015',exclude:/node_modules/},
+            { test:/\.js$/,loader:'babel-loader?presets[]=es2015,presets[]=react',exclude:/node_modules/},
             { test: /\.less$/, loader: 'style!css!postcss!less?sourceMap'},
             { test: /\.(png|jpg|eot|svg|ttf|woff|woff2)$/, loader: 'url-loader?limit=8192'}
         ]
     },
-    postcss: [autoprefixer({ browsers: ['last 2 versions'] }) ]
+    postcss: [autoprefixer({ browsers: ['last 2 versions','chrome > 40'] }) ]
 }

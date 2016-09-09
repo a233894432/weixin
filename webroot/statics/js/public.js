@@ -266,10 +266,31 @@ var Z_Util = {
         return returnObj;
     },
     runAnim: (selector,x,callback) => {
-        $(selector).addClass(x + " animated").one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',function(){
-            $(this).removeClass(x + " animated")
+        var _elementStyle = document.createElement("div").style;
+        var _vendor = (function () {
+            var vendors = ['a', 'webkitA', 'MozA', 'msA', 'OA'],
+                transform,
+                i = 0,
+                l = vendors.length;
+
+            for ( ; i < l; i++ ) {
+                console.log(i);
+                transform = vendors[i] + 'nimation';
+                if ( transform in _elementStyle ) return transform;
+            }
+
+            return false;
+        })();
+        var listenEvent = ""
+        if(_vendor){
+            listenEvent = _vendor == "animation" ?  _vendor + 'end' : _vendor + "End";
+            $(selector).addClass(x + " animated").one(listenEvent,function(){
+                $(this).removeClass(x + " animated")
+                if(callback) callback();
+            })
+        }else{
             if(callback) callback();
-        })
+        }
     },
     getHistoryState: function(prevHash, nextHash) {
         var historyState = "",

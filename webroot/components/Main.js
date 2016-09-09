@@ -4,6 +4,7 @@ import { Modal } from './Common'
 import Z_Util from '../statics/js/public'
 require("../statics/less/common.less");
 require("../statics/less/subpage.less");
+require("../statics/css/animate.css");
 
 
 const Main = React.createClass({
