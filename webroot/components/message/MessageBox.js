@@ -6,7 +6,7 @@ import ChatBox from '../chat/ChatBox'
 import ChatSet from '../chat/ChatSet';
 import Z_Util from '../../statics/js/public'
 import ReactIScroll from 'react-iscroll'
-import iScroll from 'iscroll'
+import iScroll from 'iscroll/build/iscroll-probe'
 
 const MessageBox = React.createClass({
     getDefaultProps(){
@@ -75,11 +75,24 @@ const MessageBox = React.createClass({
     render(){
         return (
             <div id="messagebox" style={{height:"100%"}}>
-                <ReactIScroll ref="scroller" iScroll={iScroll} options={this.props.options} onScrollStart={this.onScrollStart}>
+                <ReactIScroll ref="scroller" iScroll={iScroll}
+                              options={this.props.options}
+                              onFlick={this.onFlick}
+                              onScroll={this.onScroll}
+                              onScrollStart={this.onScrollStart}>
                     <MessageList/>
                 </ReactIScroll>
             </div>
         )
+    },
+    onScroll(e){
+        console.log("iscroller onscroll")
+    },
+    onFlick(e){
+        console.log("iscroller onFlick")
+    },
+    onScrollStart(e){
+        console.log("iscroller scrollstart");
     }
 })
 export default MessageBox;
