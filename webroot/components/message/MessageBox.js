@@ -5,8 +5,17 @@ import ChatBox from '../chat/ChatBox'
 //import ChatBoxMap from '../../containers/ChatBoxMap'
 import ChatSet from '../chat/ChatSet';
 import Z_Util from '../../statics/js/public'
+import ReactIScroll from 'react-iscroll'
+import iScroll from 'iscroll'
 
 const MessageBox = React.createClass({
+    getDefaultProps(){
+        return ({
+            options: {
+                mouseWheel: true
+            }
+        })
+    },
     contextTypes:{
         subPages: React.PropTypes.string,
         router: React.PropTypes.object,
@@ -65,8 +74,10 @@ const MessageBox = React.createClass({
     },
     render(){
         return (
-            <div id="messagebox">
-                <MessageList/>
+            <div id="messagebox" style={{height:"100%"}}>
+                <ReactIScroll ref="scroller" iScroll={iScroll} options={this.props.options} onScrollStart={this.onScrollStart}>
+                    <MessageList/>
+                </ReactIScroll>
             </div>
         )
     }
