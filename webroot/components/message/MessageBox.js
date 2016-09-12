@@ -72,6 +72,10 @@ const MessageBox = React.createClass({
         }
 
     },
+    componentDidMount(){
+        var uid = 1;
+        this.props.getMessages(uid);
+    },
     render(){
         return (
             <div id="messagebox" style={{height:"100%"}}>
@@ -80,7 +84,7 @@ const MessageBox = React.createClass({
                               onFlick={this.onFlick}
                               onScroll={this.onScroll}
                               onScrollStart={this.onScrollStart}>
-                    <MessageList/>
+                    <MessageList messages={this.props.messages}/>
                 </ReactIScroll>
             </div>
         )

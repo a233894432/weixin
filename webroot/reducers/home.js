@@ -19,6 +19,10 @@ const home = (state={},action) => {
                 view: action.view,
                 belongto: action.belongto
             })
+        case "RECEIVE_MESSAGES":
+            return Object.assign({},state, {
+                messages: action.messages
+            })
         default:
             return state;
     }
