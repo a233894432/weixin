@@ -9,6 +9,7 @@ var userHelper = require("../bin/userHelper");
 var verifCode = userHelper.verifCode;
 var verifUsrename = userHelper.verifUsrename;
 
+//登录
 router.get("/login", (req,res,next) => {
 
     var username = req.param("username");
@@ -22,6 +23,7 @@ router.get("/login", (req,res,next) => {
     })
 })
 
+//注册
 router.get("/register", (req,res,next) => {
 
     var resObj = {},
@@ -55,7 +57,16 @@ router.get("/register", (req,res,next) => {
     })
 
 })
+router.get("/info", (req, res, next) => {
+    var id = req.param("id");
+    var sql = `select * from users where id = ${id}`;
 
+    conn(sql, rows => {
+        res.json({response_data: rows[0]});
+    })
+})
+
+//验证码
 router.get("/code", (req,res,next) => {
 
 
