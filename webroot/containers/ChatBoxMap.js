@@ -5,7 +5,7 @@ import {intoChatBoxSeting} from "../actions/message"
 const mapStateToProps = (state) => {
     var { home } = state;
     return {
-        into_chatbox_id: home.chatBoxSeting ? home.chatBoxSeting.chatBoxID : 0
+        chat: home.chat || {}
     }
 }
 

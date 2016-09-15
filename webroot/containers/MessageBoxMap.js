@@ -5,10 +5,11 @@ import {apiMessageList} from "../actions/message"
 const mapStateToProps = (state) => {
     var { home, routing } = state;
     return {
-        into_msg_id: home.message ? home.message.into_id : 0,
         view: home.view,
         belongto: home.belongto,
         messages: home.messages || [],
+        option: home.option,
+        chat: home.chat || {},
         routing
     }
 }
