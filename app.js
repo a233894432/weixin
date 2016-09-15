@@ -23,7 +23,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  name: 'jsessionid',
   secret: "hello kitty dog",
   resave: false,
   saveUninitialized: true,
