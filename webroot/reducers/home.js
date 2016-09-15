@@ -28,6 +28,10 @@ const home = (state={},action) => {
             return Object.assign({},state, {
                 contacts: action.contacts
             })
+        case "RECEIVE_UINFO":
+            return Object.assign({},state, {
+                uinfo: action.uinfo
+            })
         default:
             return state;
     }
