@@ -25,7 +25,6 @@ var packScroll = function(IscrollWraper){
 
             var timeDiff = new Date().getTime() - this.timestamp;
             var yDiff = this.endY == 0 ? 0 : (this.endY - this.startY);
-
             if(timeDiff < 200 && Math.abs(yDiff) < 20){
                 if(cb) cb();
             }
