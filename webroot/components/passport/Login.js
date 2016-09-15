@@ -44,7 +44,7 @@ const Login = React.createClass({
             success: res => {
                 res.json().then((json) => {
                     if(json.status == "ok"){
-                        this.context.router.push("/appview/tasks");
+                        this.context.router.push("/appview/home");
                     }
                 })
             }

@@ -2,7 +2,8 @@ import React from 'react'
 import {render} from 'react-dom'
 import Z_Util from '../../statics/js/public'
 import ContactList from './ContactList'
-import PersonInfo from './PersonInfo'
+import PersonInfo from './PersonInfo'                       //用户个人信息
+import OfficialBox from '../official/OfficialBox'         //公众号容器
 import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll'
 require("../../statics/less/contact.less");
@@ -10,7 +11,8 @@ require("../../statics/less/contact.less");
 const ContactBox = React.createClass({
     contextTypes: {
         router: React.PropTypes.object,
-        store: React.PropTypes.object
+        store: React.PropTypes.object,
+        uid: React.PropTypes.number
     },
     getDefaultProps(){
         return ({
@@ -49,10 +51,19 @@ const ContactBox = React.createClass({
 
                 if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
             }
+            if(view.startsWith("contact/official")){
+                var div1 = $("<div class='official'></div>");
+
+                div1.appendTo("#subPage");
+                render(<OfficialBox context={this.context} />, div1[0]);
+
+                if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
+            }
         }
     },
     componentDidMount(){
-        this.props.getContactList(1);
+        var {uid} = this.context;
+        this.props.getContactList(uid);
     },
     render(){
         var {contacts} = this.props;

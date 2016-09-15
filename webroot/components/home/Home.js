@@ -3,7 +3,7 @@ import React from 'react'
 import MessageBoxMap from '../../containers/MessageBoxMap'
 import ContactBoxMap from '../../containers/ContactBoxMap'
 import DiscoverBoxMap from '../../containers/DiscoverBoxMap'
-import MeBox from '../me/MeBox'
+import MeBoxMap from '../../containers/MeBoxMap'
 
 require("../../statics/less/home.less");
 
@@ -26,7 +26,7 @@ const Home = React.createClass({
                         <DiscoverBoxMap />
                     </div>
                     <div className="box_item">
-                        <MeBox />
+                        <MeBoxMap />
                     </div>
                 </div>
             </div>
