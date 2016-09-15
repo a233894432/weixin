@@ -1,8 +1,9 @@
 
-export const showView = (view="",belongto)=> {
+export const showView = (view="",belongto,option)=> {
     return {
         type: "SHOW_VIEW",
         view,
-        belongto
+        belongto,
+        option
     }
 }
