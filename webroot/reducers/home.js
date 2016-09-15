@@ -17,11 +17,16 @@ const home = (state={},action) => {
         case "SHOW_VIEW":
             return Object.assign({},state, {
                 view: action.view,
-                belongto: action.belongto
+                belongto: action.belongto,
+                option: action.option
             })
         case "RECEIVE_MESSAGES":
             return Object.assign({},state, {
                 messages: action.messages
+            })
+        case "RECEIVE_CONTACTS":
+            return Object.assign({},state, {
+                contacts: action.contacts
             })
         default:
             return state;
