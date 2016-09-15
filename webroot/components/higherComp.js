@@ -11,7 +11,7 @@ var packScroll = function(IscrollWraper){
                 touching: this.touching,
                 touchEnd: this.touchEnd
             }
-            return <IscrollWraper {...touchEvents}/>
+            return <IscrollWraper {...this.props} {...touchEvents}/>
         },
         touchStart(e){
             this.timestamp = new Date().getTime();

@@ -19,12 +19,13 @@ const MessageBox = React.createClass({
     contextTypes:{
         subPages: React.PropTypes.string,
         router: React.PropTypes.object,
-        store: React.PropTypes.object
+        store: React.PropTypes.object,
+        uid: React.PropTypes.number
     },
     componentWillReceiveProps(nextProps,nextContext){
 
         var {subPages} = nextContext,
-            {into_msg_id,view,showView,belongto} = nextProps,
+            {chat,option,view,showView,belongto} = nextProps,
             prevHash = this.props.routing.locationBeforeTransitions.hash,
             nextHash = nextProps.routing.locationBeforeTransitions.hash,
             historyState = Z_Util.getHistoryState(prevHash, nextHash);
@@ -57,7 +58,7 @@ const MessageBox = React.createClass({
                 var div1 = $("<div class='sub_message'></div>");
 
                 div1.appendTo(subPages);
-                render(<ChatBox context={this.context} msgid={into_msg_id}/>,div1[0]);
+                render(<ChatBox context={this.context} pid={option.pid}/>,div1[0]);
 
                 if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
             }
@@ -65,7 +66,7 @@ const MessageBox = React.createClass({
                 var div1 = $("<div class='div2'></div>");
 
                 div1.appendTo(subPages);
-                render(<ChatSet {...this.context} />,div1[0]);
+                render(<ChatSet {...this.context} option={option}/>,div1[0]);
 
                 if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
             }
@@ -84,7 +85,7 @@ const MessageBox = React.createClass({
                               onFlick={this.onFlick}
                               onScroll={this.onScroll}
                               onScrollStart={this.onScrollStart}>
-                    <MessageList messages={this.props.messages}/>
+                    <MessageList context={this.context} messages={this.props.messages}/>
                 </ReactIScroll>
             </div>
         )

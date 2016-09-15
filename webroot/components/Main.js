@@ -10,13 +10,15 @@ require("../statics/css/animate.css");
 const Main = React.createClass({
     childContextTypes: {
         color: React.PropTypes.string,
-        subPages: React.PropTypes.string
+        subPages: React.PropTypes.string,
+        uid: React.PropTypes.number
     },
     getChildContext(){
         var {subPage} = this.refs;
         return {
             color: "purple",
-            subPages: "#subPage"
+            subPages: "#subPage",
+            uid: 1
         }
     },
     modalSubmit(){

@@ -20,7 +20,7 @@ const ContactBox = React.createClass({
         })
     },
     componentWillReceiveProps(nextProps,nextContext){
-        var {view,belongto,showView} = nextProps,
+        var {option,view,belongto,showView} = nextProps,
             prevHash = this.props.routing.locationBeforeTransitions.hash,
             nextHash = nextProps.routing.locationBeforeTransitions.hash,
             historyState = Z_Util.getHistoryState(prevHash, nextHash);
@@ -45,27 +45,23 @@ const ContactBox = React.createClass({
                 var div1 = $("<div class='personinfo'></div>");
 
                 div1.appendTo("#subPage");
-                render(<PersonInfo context={this.context} />,div1[0]);
+                render(<PersonInfo context={this.context} pid={option.pid}/>,div1[0]);
 
                 if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
             }
         }
-
-
+    },
+    componentDidMount(){
+        this.props.getContactList(1);
     },
     render(){
-        var users = [
-            {id:1,"name":"aaa",thumb:'/statics/images/portrait.png'},{id:2,"name":"bbb",thumb:'/statics/images/portrait.png'},
-            {id:3,"name":"ccc",thumb:'/statics/images/portrait.png'},{id:4,"name":"abc",thumb:'/statics/images/portrait.png'},
-            {id:5,"name":"包含",thumb:'/statics/images/portrait.png'},{id:6,"name":"引用",thumb:'/statics/images/portrait.png'},
-            {id:7,"name":"黄汉",thumb:'/statics/images/portrait.png'},{id:8,"name":"夏荨",thumb:'/statics/images/portrait.png'}
-        ];
-        users = Z_Util.sortNameByPy(users,"name");
-        users = Z_Util.groupBy(users,"belong");
+        var {contacts} = this.props;
+        contacts = Z_Util.sortNameByPy(contacts,"name");
+        contacts = Z_Util.groupBy(contacts,"belong");
         return (
             <div id="contactbox" style={{height:"100%"}}>
                 <ReactIScroll iScroll={iScroll} options={this.props.options} onScrollStart={this.onScrollStart}>
-                    <ContactList usersgroup={users}/>
+                    <ContactList usersgroup={contacts}/>
                 </ReactIScroll>
             </div>
         )
