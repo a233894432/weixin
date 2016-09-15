@@ -26,10 +26,13 @@ const Message = React.createClass({
             timeStr = parseInt(diffTime/(1000 * 60 * 60 * 24 * 30)) + "月前";
         }
         return(
-            <div data-mid={message.uid == uid ? message.contact_id : message.uid} className="message" onClick={(e) => {
-                //store.dispatch(showView("message","message"));
-                //router.push("/appview/home#/message");
-            }} onTouchEnd={ e => {touchEnd(e,this.toMessage(e))} } onTouchStart={touchStart} onTouchMove={touching}>
+            <div ref="message" data-mid={message.uid == uid ? message.contact_id : message.uid} className="message"
+                 onTouchEnd={ e => {
+                    var toMessage = this.toMessage;
+                    touchEnd(e,this.toMessage)
+                 }}
+                 onTouchStart={touchStart}
+                 onTouchMove={touching}>
                 <img className="portrait" src={message.portrait} />
                 <p className="maintit" style={1 == 2 ? {color:'#38f'}: {}}>{message.name}</p>
                 <small>{message.sendInfo}</small>
@@ -37,13 +40,10 @@ const Message = React.createClass({
             </div>
         )
     },
-    toMessage(e){
+    toMessage(){
         var { router, store} = this.context;
-
-        var $element = $(e.target);
-        if(!$element.hasClass("message")){
-            $element = $element.closest(".message");
-        }
+        var {message} = this.refs;
+        var $element = $(message);
 
         var pid = $element.data("mid");
         store.dispatch(showView("message","message",{pid: pid}));
