@@ -1,5 +1,4 @@
 "use strict";
-var express = require("express");
 var conn = require("./db/DBHelper");
 
 var verifCode = function(mobile,code){
@@ -26,6 +25,7 @@ var verifUsrename = function(username){
         })
     })
 }
+
 const userHelper = {
     verifCode: verifCode,
     verifUsrename: verifUsrename
