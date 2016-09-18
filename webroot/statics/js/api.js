@@ -9,7 +9,8 @@ const Z_API = {
     getMessageList: "/api/message/list",    //获取首页messageList
     getContactList: "/api/contact/list",     //获取联系人list
     getChatCont:    "/api/contact/chatcont",     //获取聊天信息
-    getSubScriberList:"/api/subscriber/list"    //获取用户公众号列表
+    getSubScriberList:"/api/subscriber/list",    //获取用户公众号列表
+    getSubScriberInfo: "/api/subscriber/info"   //获取公众号信息
 }
 
 export default Z_API;
