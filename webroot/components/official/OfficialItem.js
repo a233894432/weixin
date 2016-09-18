@@ -1,4 +1,5 @@
 import React from 'react'
+import {showView} from "../../actions/home"
 import {packScroll} from "../higherComp";
 
 const OfficialItem = React.createClass({
@@ -21,9 +22,9 @@ const OfficialItem = React.createClass({
         var $element = $(official);
 
         var oid = $element.data("oid");
-        var {store,router} = this.context;
+        var {store,router} = this.props.context;
         store.dispatch(showView("contact/official/detail","contact",{oid: oid}));
-        //router.push("/appview/home#/contact/personinfo");
+        router.push("/appview/home#/contact/official/detail");
     }
 })
 export default packScroll(OfficialItem);

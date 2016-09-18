@@ -2,6 +2,7 @@ import React from 'react'
 import ContactGroup from './ContactGroup'
 import Z_API from '../../statics/js/api'
 import {showView} from '../../actions/home'
+import {packScroll} from "../higherComp"
 
 const ContactList = React.createClass({
     contextTypes: {
@@ -10,7 +11,7 @@ const ContactList = React.createClass({
         uid: React.PropTypes.number
     },
     render(){
-        var {usersgroup} = this.props;
+        var {usersgroup,touchStart, touching, touchEnd} = this.props;
         var groups = [];
         for(let i in usersgroup){
             groups.push(<ContactGroup key={i} belong={i} cts={usersgroup[i]}/>);
@@ -30,10 +31,16 @@ const ContactList = React.createClass({
                         <img src="/statics/images/cangshu.png" width="42px" />
                         <p>标签</p>
                     </div>
-                    <div onClick={this.getSubScriberList} data-pid="1" className="contact">
+                    <div data-pid="1" className="contact"
+                         onTouchStart={touchStart}
+                         onTouchMove={touching}
+                         onTouchEnd={e => {
+                            touchEnd(e,this.getSubScriberList)
+                         }}>
                         <img src="/statics/images/cangshu.png" width="42px" />
                         <p>公众号</p>
                     </div>
+
                 </div>
                 {groups}
             </div>
@@ -44,13 +51,6 @@ const ContactList = React.createClass({
 
         store.dispatch(showView("contact/official","contact"));
         router.push("/appview/home#/contact/official");
-        //$.ajax({
-        //    url: Z_API.getSubScriberList + "?id=1",
-        //    success: function(data){
-        //        console.log("getSubScriberList");
-        //        console.log(data);
-        //    }
-        //})
     }
 })
-export default ContactList;
+export default packScroll(ContactList);

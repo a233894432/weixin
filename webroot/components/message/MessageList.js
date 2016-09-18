@@ -10,7 +10,7 @@ const MessageList = React.createClass({
 
             <div className="MessageList">
                 {
-                    messages.map( msg => <Message key={"msg_" + msg.id} message={msg}/>)
+                    messages.map( msg => <Message key={"msg_" + msg.id + msg.ctype} message={msg}/>)
                 }
             </div>
         )

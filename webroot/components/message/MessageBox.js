@@ -3,6 +3,7 @@ import {render} from 'react-dom'
 import MessageList from "./MessageList"
 import ChatBox from '../chat/ChatBox'
 //import ChatBoxMap from '../../containers/ChatBoxMap'
+import OfficialSubject from "../official/OfficialSubject"
 import ChatSet from '../chat/ChatSet';
 import Z_Util from '../../statics/js/public'
 import ReactIScroll from 'react-iscroll'
@@ -58,7 +59,11 @@ const MessageBox = React.createClass({
                 var div1 = $("<div class='sub_message'></div>");
 
                 div1.appendTo(subPages);
-                render(<ChatBox context={this.context} pid={option.pid}/>,div1[0]);
+                if(option.ctype == 1){
+                    render(<ChatBox context={this.context} pid={option.pid}/>,div1[0]);
+                }else{
+                    render(<OfficialSubject context={this.context} oid={option.pid}/>,div1[0]);
+                }
 
                 if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
             }

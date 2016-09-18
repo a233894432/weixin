@@ -4,6 +4,7 @@ import Z_Util from '../../statics/js/public'
 import ContactList from './ContactList'
 import PersonInfo from './PersonInfo'                       //用户个人信息
 import OfficialBox from '../official/OfficialBox'         //公众号容器
+import OfficialSubject from "../official/OfficialSubject"//公众号主体
 import ReactIScroll from 'react-iscroll'
 import iScroll from 'iscroll'
 require("../../statics/less/contact.less");
@@ -33,13 +34,26 @@ const ContactBox = React.createClass({
         }
 
         console.log("contactbox 接收到的属性");
+        console.log(nextProps)
         console.log("history 状态:" + historyState);
         if(historyState == "back"){
             if(view.endsWith("contact/personinfo")){
                 var div1 = $("#subPage").find(".personinfo");
                 Z_Util.runAnim(div1,"slideOutRight",function(){
                     div1.remove();
-                    showView("","home");
+                })
+            }
+            if(view.endsWith("contact/official")){
+                var div1 = $("#subPage").find(".official");
+                Z_Util.runAnim(div1,"slideOutRight",function(){
+                    div1.remove();
+                })
+            }
+            if(view.endsWith("contact/official/detail")){
+                var div1 = $("#subPage").find(".detail");
+                Z_Util.runAnim(div1,"slideOutRight",function(){
+                    div1.remove();
+                    showView("contact/official","contact")
                 })
             }
         }else{
@@ -56,6 +70,13 @@ const ContactBox = React.createClass({
 
                 div1.appendTo("#subPage");
                 render(<OfficialBox context={this.context} />, div1[0]);
+
+                if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
+            }
+            if(view.startsWith("contact/official/detail")){
+                var div1 = $("<div class='detail'></div>");
+                div1.appendTo("#subPage");
+                render(<OfficialSubject context={this.context} oid={option.oid} />, div1[0]);
 
                 if(historyState != "reload") Z_Util.runAnim(div1,"slideInRight");
             }
